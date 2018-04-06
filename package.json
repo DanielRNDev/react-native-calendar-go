@@ -1,0 +1,18 @@
+{
+  "name": "react-native-calendar-go",
+  "version": "1.0.0",
+  "description": "Custom calendar module for react-native",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/danielhoang79/react-native-calendar-go.git"
+  },
+  "keywords": [
+    "calendar"
+  ],
+  "author": "danielhoang <danielhoang79@gmail.com>",
+  "license": "ISC"
+}
