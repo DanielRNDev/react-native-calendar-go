@@ -7,6 +7,7 @@ import {
 import PropTypes from 'prop-types';
 
 import styleConstructor from './style';
+import lodash from 'lodash';
 
 class Day extends Component {
   static propTypes = {
@@ -39,21 +40,32 @@ class Day extends Component {
       }
       return prev;
     }, false);
+    if (!lodash.isEmpty(nextProps.choseDate)) {
+      if (nextProps.choseDate.day === nextProps.children) {
+        return true;
+      }
+    }
+    if (!lodash.isEmpty(this.props.choseDate)) {
+      if (this.props.choseDate.day === this.props.children) {
+        return true;
+      }
+    }
     if (changed === 'marking') {
       let markingChanged = false;
       if (this.props.marking && nextProps.marking) {
-        markingChanged = (!(
-          this.props.marking.marked === nextProps.marking.marked
-          && this.props.marking.selected === nextProps.marking.selected
-          && this.props.marking.dotColor === nextProps.marking.dotColor
-          && this.props.marking.disabled === nextProps.marking.disabled));
+        // markingChanged = (!(
+        //   this.props.marking.marked === nextProps.marking.marked
+        //   && this.props.marking.selected === nextProps.marking.selected
+        //   && this.props.marking.dotColor === nextProps.marking.dotColor
+        //   && this.props.marking.disabled === nextProps.marking.disabled));
+        if (this.props.marking !== nextProps.marking) {
+          markingChanged = true;
+        }
       } else {
         markingChanged = true;
       }
-      // console.log('marking changed', markingChanged);
       return markingChanged;
     } else {
-      // console.log('changed', changed);
       return !!changed;
     }
   }
@@ -62,6 +74,7 @@ class Day extends Component {
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
     const dotStyle = [this.style.dot];
+    const numberRight = { position: 'absolute', right: -2, top: -5, backgroundColor: 'transparent' };
 
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
@@ -79,13 +92,17 @@ class Day extends Component {
     }
 
     if (marking.selected) {
-      containerStyle.push(this.style.selected);
+      containerStyle.push({ backgroundColor: (marking.selectedColor) ? marking.selectedColor : '#00adf5', borderRadius: 10 });
       dotStyle.push(this.style.selectedDot);
-      textStyle.push(this.style.selectedText);
+      //textStyle.push(this.style.selectedText);
     } else if (typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled') {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
       textStyle.push(this.style.todayText);
+    }
+    if (marking.hasOwnProperty('borderColorShift')) {
+      containerStyle.push({ borderColor: marking.borderColorShift, borderWidth: 1 })
+      textStyle.push({ marginTop: 0 })
     }
     return (
       <TouchableOpacity
@@ -99,6 +116,7 @@ class Day extends Component {
       >
         <Text style={textStyle}>{String(this.props.children)}</Text>
         {dot}
+        {marking.reEmployee !== 0 && <View style={numberRight}><Text style={{ color: 'red', fontSize: 9 }}>{marking.reEmployee}</Text></View>}
       </TouchableOpacity>
     );
   }

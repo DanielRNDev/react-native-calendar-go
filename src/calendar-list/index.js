@@ -37,10 +37,9 @@ class CalendarList extends Component {
     const rows = [];
     const texts = [];
     const date = parseDate(props.current) || XDate();
-
-    console.log('current', date);
     for (let i = 0; i <= this.pastScrollRange + this.futureScrollRange; i++) {
-      const rangeDate = date.clone().addMonths(i - this.pastScrollRange, true);
+      //const rangeDate = date.clone().addMonths(i - this.pastScrollRange, true);
+      const rangeDate = date.clone().addMonths(i - moment().month(), true);
       rows.push(rangeDate);
       // console.log(rangeDate);
       const rangeDateStr = rangeDate.toString('MMM yyyy');
@@ -62,7 +61,7 @@ class CalendarList extends Component {
       initialized: false
     };
     this.lastScrollPosition = -1000;
-    
+
     this.onViewableItemsChangedBound = this.onViewableItemsChanged.bind(this);
     this.renderCalendarBound = this.renderCalendar.bind(this);
   }

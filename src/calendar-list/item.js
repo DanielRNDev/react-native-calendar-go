@@ -9,11 +9,11 @@ class CalendarListItem extends Component {
     this.style = styleConstructor(props.theme);
   }
 
-  shouldComponentUpdate(nextProps) {
-    const r1 = this.props.item;
-    const r2 = nextProps.item;
-    return r1.toString('yyyy MM') !== r2.toString('yyyy MM') || !!(r2.propbump && r2.propbump !== r1.propbump);
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   const r1 = this.props.item;
+  //   const r2 = nextProps.item;
+  //   return r1.toString('yyyy MM') !== r2.toString('yyyy MM') || !!(r2.propbump && r2.propbump !== r1.propbump);
+  // }
 
   render() {
     const row = this.props.item;
