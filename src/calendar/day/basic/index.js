@@ -40,13 +40,13 @@ class Day extends Component {
       }
       return prev;
     }, false);
-    if (!lodash.isEmpty(nextProps.choseDate)) {
-      if (nextProps.choseDate.day === nextProps.children) {
+    if (!lodash.isEmpty(nextProps.chooseDate)) {
+      if (nextProps.chooseDate.day === nextProps.children) {
         return true;
       }
     }
-    if (!lodash.isEmpty(this.props.choseDate)) {
-      if (this.props.choseDate.day === this.props.children) {
+    if (!lodash.isEmpty(this.props.chooseDate)) {
+      if (this.props.chooseDate.day === this.props.children) {
         return true;
       }
     }

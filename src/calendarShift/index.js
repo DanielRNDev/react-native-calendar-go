@@ -75,7 +75,7 @@ class CalendarShift extends Component {
     onPressArrowLeft: PropTypes.func,
     // Handler which gets executed when press arrow icon left. It receive a callback can go next month
     onPressArrowRight: PropTypes.func,
-    choseDate: PropTypes.object,
+    chooseDate: PropTypes.object,
   };
 
   constructor(props) {
@@ -185,7 +185,7 @@ class CalendarShift extends Component {
           onLongPress={this.longPressDay}
           date={xdateToData(day)}
           marking={this.getDateMarking(day)}
-          choseDate={this.props.choseDate}
+          chooseDate={this.props.chooseDate}
         >
           {date}
         </DayComp>
@@ -222,7 +222,7 @@ class CalendarShift extends Component {
   }
 
   renderWeekNumber (weekNumber) {
-    return <Day choseDate={this.props.choseDate} key={`week-${weekNumber}`} theme={this.props.theme} marking={{disableTouchEvent: true}} state='disabled'>{weekNumber}</Day>;
+    return <Day chooseDate={this.props.chooseDate} key={`week-${weekNumber}`} theme={this.props.theme} marking={{disableTouchEvent: true}} state='disabled'>{weekNumber}</Day>;
   }
 
   renderWeek(days, id) {

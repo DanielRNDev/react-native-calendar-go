@@ -19,7 +19,7 @@ class Day extends Component {
     onPress: PropTypes.func,
     onLongPress: PropTypes.func,
     date: PropTypes.object,
-    choseDate: PropTypes.object,
+    chooseDate: PropTypes.object,
   };
 
   constructor(props) {
@@ -45,13 +45,13 @@ class Day extends Component {
       }
       return prev;
     }, false);
-    if (!lodash.isEmpty(nextProps.choseDate)) {
-      if (nextProps.choseDate.day === nextProps.children) {
+    if (!lodash.isEmpty(nextProps.chooseDate)) {
+      if (nextProps.chooseDate.day === nextProps.children) {
         return true;
       }
     }
-    if (!lodash.isEmpty(this.props.choseDate)) {
-      if (this.props.choseDate.day === this.props.children) {
+    if (!lodash.isEmpty(this.props.chooseDate)) {
+      if (this.props.chooseDate.day === this.props.children) {
         return true;
       }
     }
@@ -115,7 +115,7 @@ class Day extends Component {
       containerStyle.push({ borderColor: marking.borderColorShift, borderWidth: 3 })
       textStyle.push({ marginTop: 2 })
     }
-    if(this.props.choseDate.day === this.props.children && this.props.date.month === this.props.choseDate.month) {
+    if(this.props.chooseDate.day === this.props.children && this.props.date.month === this.props.chooseDate.month) {
       containerStyle.push({ borderColor: 'black', borderWidth: 3 })
       textStyle.push({ marginTop: 2 })
     }
