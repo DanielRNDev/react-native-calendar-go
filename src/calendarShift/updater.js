@@ -46,6 +46,11 @@ export default function shouldComponentUpdate(nextProps, nextState) {
       field: 'current'
     };
   }
-  //console.log(shouldUpdate.field, shouldUpdate.update);
+  if (nextProps.chooseDate !== this.props.chooseDate) {
+    shouldUpdate = {
+      update: true,
+      field: 'current'
+    };
+  }
   return shouldUpdate.update;
 }

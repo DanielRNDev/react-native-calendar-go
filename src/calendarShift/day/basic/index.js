@@ -81,7 +81,7 @@ class Day extends Component {
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
     const dotStyle = [this.style.dot];
-    const numberRight = { position: 'absolute', right: -2, top: -5, backgroundColor: 'transparent' };
+    const numberRight = { position: 'absolute', right: -5, top: -12, backgroundColor: 'transparent' };
 
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
@@ -105,20 +105,24 @@ class Day extends Component {
         containerStyle.push({backgroundColor: marking.selectedColor});
       }
       dotStyle.push(this.style.selectedDot);
-      //textStyle.push(this.style.selectedText);
     } else if (isDisabled) {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
       textStyle.push(this.style.todayText);
     }
+
     if (marking.hasOwnProperty('borderColorShift')) {
       containerStyle.push({ borderColor: marking.borderColorShift, borderWidth: 3 })
       textStyle.push({ marginTop: 2 })
     }
-    if(this.props.chooseDate.day === this.props.children && this.props.date.month === this.props.chooseDate.month) {
-      containerStyle.push({ borderColor: 'black', borderWidth: 3 })
-      textStyle.push({ marginTop: 2 })
+
+    if (!lodash.isEmpty(this.props.chooseDate)) {
+      if(this.props.chooseDate.day === this.props.children && this.props.date.month === this.props.chooseDate.month) {
+        containerStyle.push({ borderColor: 'black', borderWidth: 3 })
+        textStyle.push({ marginTop: 2 })
+      }
     }
+
     if(lodash.isEmpty(marking.selectedColor)) {
       isDisabled = true
     }
