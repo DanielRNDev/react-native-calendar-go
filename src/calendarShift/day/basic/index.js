@@ -123,17 +123,13 @@ class Day extends Component {
       }
     }
 
-    if(lodash.isEmpty(marking.selectedColor)) {
-      isDisabled = true
-    }
-
     return (
       <TouchableOpacity
         style={[containerStyle, { borderRadius: 16 }]}
         onPress={this.onDayPress}
         onLongPress={this.onDayLongPress}
         activeOpacity={marking.activeOpacity}
-        disabled={isDisabled}
+        disabled={!marking.selected}
       >
         <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
         {dot}

@@ -9,8 +9,6 @@ export default function(theme={}) {
     header: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      paddingLeft: 10,
-      paddingRight: 10,
       alignItems: 'center'
     },
     monthText: {
@@ -21,8 +19,7 @@ export default function(theme={}) {
       margin: 10
     },
     arrow: {
-      padding: 10,
-      flex: 2
+      flex: 3
     },
     arrowImage: {
       ...Platform.select({
