@@ -7,16 +7,15 @@ export default function styleConstructor(theme={}) {
   const appStyle = {...defaultStyle, ...theme};
   return StyleSheet.create({
     base: {
-      width: 14,
-      height: 14,
-      alignItems: 'center'
+      width: 18,
+      height: 18,
+      alignItems: 'center',
+      justifyContent: 'center',
     },
     text: {
-      marginTop: 2,
-      fontSize: 8,
+      fontSize: 10,
       fontFamily: appStyle.textDayFontFamily,
-      fontWeight: '800',
-      color: '#000',
+      color: '#333333',
       backgroundColor: 'rgba(255, 255, 255, 0)'
     },
     alignedText: {
