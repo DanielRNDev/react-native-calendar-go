@@ -74,7 +74,7 @@ class Day extends Component {
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
     const dotStyle = [this.style.dot];
-    const numberRight = { position: 'absolute', right: -2, top: -5, backgroundColor: 'transparent' };
+    const numberRight = { position: 'absolute', right: -4, top: -5, backgroundColor: 'transparent' };
 
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
@@ -116,7 +116,7 @@ class Day extends Component {
       >
         <Text style={textStyle}>{String(this.props.children)}</Text>
         {dot}
-        {marking.reEmployee !== 0 && <View style={numberRight}><Text style={{ color: 'red', fontSize: 9 }}>{marking.reEmployee}</Text></View>}
+        {marking.reEmployee !== 0 && <View style={numberRight}><Text style={{ color: 'red', fontSize: 8 }}>{marking.reEmployee}</Text></View>}
       </TouchableOpacity>
     );
   }

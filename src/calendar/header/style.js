@@ -12,11 +12,10 @@ export default function(theme={}) {
       alignItems: 'center'
     },
     monthText: {
-      fontSize: 15,
+      fontSize: 16,
+      lineHeight: 16,
       fontFamily: appStyle.textMonthFontFamily,
-      fontWeight: '800',
       color: 'rgb(55,198,251)',
-      margin: 4
     },
     arrow: {
       padding: 10
