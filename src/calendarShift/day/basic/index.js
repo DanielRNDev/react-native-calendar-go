@@ -81,7 +81,6 @@ class Day extends Component {
     const containerStyle = [this.style.base];
     const textStyle = [this.style.text];
     const dotStyle = [this.style.dot];
-    const numberRight = { position: 'absolute', right: -5, top: -12, backgroundColor: 'transparent' };
 
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
@@ -97,6 +96,21 @@ class Day extends Component {
         dotStyle.push({backgroundColor: marking.dotColor});
       }
       dot = (<View style={dotStyle}/>);
+    }
+    let topExtra;
+    if (marking.topExtra || marking.reEmployee) {
+      topExtra = (
+        <View style={[this.style.topExtra]}>
+          <Text
+            style={[
+              this.style.extraText,
+              marking.selectedExtraTextColor ? { color: marking.selectedExtraTextColor } : {},
+            ]}
+          >
+            {marking.topExtra || marking.reEmployee}
+          </Text>
+        </View>
+      );
     }
 
     if (marking.selected) {
@@ -134,7 +148,7 @@ class Day extends Component {
       >
         <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
         {dot}
-        {marking.reEmployee !== 0 && <View style={numberRight}><Text style={{ color: 'red' }}>{marking.reEmployee}</Text></View>}
+        {topExtra}
       </TouchableOpacity>
     );
   }
