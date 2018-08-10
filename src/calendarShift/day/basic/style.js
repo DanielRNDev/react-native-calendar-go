@@ -49,6 +49,15 @@ export default function styleConstructor(theme={}) {
     selectedDot: {
       backgroundColor: appStyle.selectedDotColor
     },
+    topExtra: {
+      position: 'absolute',
+      right: -5,
+      top: -12,
+      backgroundColor: 'transparent',
+    },
+    extraText: {
+      color: '#f44336',
+    },
     ...(theme[STYLESHEET_ID] || {})
   });
 }
