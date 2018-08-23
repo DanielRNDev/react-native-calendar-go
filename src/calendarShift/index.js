@@ -1,13 +1,13 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   View,
-  ViewPropTypes
+  ViewPropTypes,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
 import XDate from 'xdate';
 import dateutils from '../dateutils';
-import {xdateToData, parseDate} from '../interface';
+import { xdateToData, parseDate } from '../interface';
 import styleConstructor from './style';
 import Day from './day/basic';
 import UnitDay from './day/period';
@@ -15,7 +15,7 @@ import MultiDotDay from './day/multi-dot';
 import CalendarHeader from './header';
 import shouldComponentUpdate from './updater';
 
-//Fallback when RN version is < 0.44
+// Fallback when RN version is < 0.44
 const viewPropTypes = ViewPropTypes || View.propTypes;
 
 const EmptyArray = [];
@@ -88,7 +88,7 @@ class CalendarShift extends Component {
       currentMonth = XDate();
     }
     this.state = {
-      currentMonth
+      currentMonth,
     };
 
     this.updateMonth = this.updateMonth.bind(this);
@@ -99,10 +99,10 @@ class CalendarShift extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const current= parseDate(nextProps.current);
+    const current = parseDate(nextProps.current);
     if (current && current.toString('yyyy MM') !== this.state.currentMonth.toString('yyyy MM')) {
       this.setState({
-        currentMonth: current.clone()
+        currentMonth: current.clone(),
       });
     }
   }
@@ -112,7 +112,7 @@ class CalendarShift extends Component {
       return;
     }
     this.setState({
-      currentMonth: day.clone()
+      currentMonth: day.clone(),
     }, () => {
       if (!doNotTriggerListeners) {
         const currMont = this.state.currentMonth.clone();
@@ -169,9 +169,9 @@ class CalendarShift extends Component {
     let dayComp;
     if (!dateutils.sameMonth(day, this.state.currentMonth) && this.props.hideExtraDays) {
       if (this.props.markingType === 'period') {
-        dayComp = (<View key={id} style={{flex: 1}}/>);
+        dayComp = (<View key={id} style={{ flex: 1 }} />);
       } else {
-        dayComp = (<View key={id} style={this.style.dayContainer}/>);
+        dayComp = (<View key={id} style={this.style.dayContainer} />);
       }
     } else {
       const DayComp = this.getDayComponent();
@@ -200,12 +200,12 @@ class CalendarShift extends Component {
     }
 
     switch (this.props.markingType) {
-    case 'period':
-      return UnitDay;
-    case 'multi-dot':
-      return MultiDotDay;
-    default:
-      return Day;
+      case 'period':
+        return UnitDay;
+      case 'multi-dot':
+        return MultiDotDay;
+      default:
+        return Day;
     }
   }
 
@@ -216,13 +216,13 @@ class CalendarShift extends Component {
     const dates = this.props.markedDates[day.toString('yyyy-MM-dd')] || EmptyArray;
     if (dates.length || dates) {
       return dates;
-    } else {
+    } 
       return false;
-    }
+    
   }
 
-  renderWeekNumber (weekNumber) {
-    return <Day chooseDate={this.props.chooseDate} key={`week-${weekNumber}`} theme={this.props.theme} marking={{disableTouchEvent: true}} state='disabled'>{weekNumber}</Day>;
+  renderWeekNumber(weekNumber) {
+    return <Day chooseDate={this.props.chooseDate} key={`week-${weekNumber}`} theme={this.props.theme} marking={{ disableTouchEvent: true }} state="disabled">{weekNumber}</Day>;
   }
 
   renderWeek(days, id) {
@@ -247,7 +247,8 @@ class CalendarShift extends Component {
     let indicator;
     const current = parseDate(this.props.current);
     if (current) {
-      const lastMonthOfDay = current.clone().addMonths(1, true).setDate(1).addDays(-1).toString('yyyy-MM-dd');
+      const lastMonthOfDay = current.clone().addMonths(1, true).setDate(1).addDays(-1)
+.toString('yyyy-MM-dd');
       if (this.props.displayLoadingIndicator &&
           !(this.props.markedDates && this.props.markedDates[lastMonthOfDay])) {
         indicator = true;

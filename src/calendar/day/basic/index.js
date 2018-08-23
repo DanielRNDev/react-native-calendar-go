@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   TouchableOpacity,
   Text,
-  View
+  View,
 } from 'react-native';
 import PropTypes from 'prop-types';
 
@@ -18,7 +18,7 @@ class Day extends Component {
     theme: PropTypes.object,
     marking: PropTypes.any,
     onPress: PropTypes.func,
-    date: PropTypes.object
+    date: PropTypes.object,
   };
 
   constructor(props) {
@@ -65,9 +65,9 @@ class Day extends Component {
         markingChanged = true;
       }
       return markingChanged;
-    } else {
-      return !!changed;
     }
+    return !!changed;
+
   }
 
   render() {
@@ -78,16 +78,16 @@ class Day extends Component {
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
       marking = {
-        marking: true
+        marking: true,
       };
     }
     let dot;
     if (marking.marked) {
       dotStyle.push(this.style.visibleDot);
       if (marking.dotColor) {
-        dotStyle.push({backgroundColor: marking.dotColor});
+        dotStyle.push({ backgroundColor: marking.dotColor });
       }
-      dot = (<View style={dotStyle}/>);
+      dot = (<View style={dotStyle} />);
     }
     let topExtra;
     if (marking.topExtra || marking.reEmployee) {
@@ -113,30 +113,39 @@ class Day extends Component {
         borderRadius: 10,
       });
       dotStyle.push(this.style.selectedDot);
-      textStyle.push(this.style.selectedText);
+      if (marking.selectedTextColor) {
+        textStyle.push({ color: marking.selectedTextColor });
+      } else {
+        textStyle.push(this.style.selectedText);
+      }
+
     } else if (typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled') {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
       textStyle.push(this.style.todayText);
     }
     if (marking.hasOwnProperty('borderColorShift')) {
-      containerStyle.push({ borderColor: marking.borderColorShift, borderWidth: 1 })
-      textStyle.push({ marginTop: 0 })
+      containerStyle.push({ borderColor: marking.borderColorShift, borderWidth: 1 });
+      textStyle.push({ marginTop: 0 });
     }
     return (
-      <TouchableOpacity
-        style={containerStyle}
-        onPress={this.onDayPress}
-        disabled={
-          typeof marking.disabled !== 'undefined'
-            ? marking.disabled
-            : this.props.state === 'disabled'
-        }
+      <View style={this.style.container}
       >
-        <Text style={textStyle}>{String(this.props.children)}</Text>
-        {dot}
+        <TouchableOpacity
+          style={containerStyle}
+          onPress={this.onDayPress}
+          disabled={
+            typeof marking.disabled !== 'undefined'
+              ? marking.disabled
+              : this.props.state === 'disabled'
+          }
+        >
+          <Text style={textStyle}>{String(this.props.children)}</Text>
+          {dot}
+        </TouchableOpacity>
+
         {topExtra}
-      </TouchableOpacity>
+      </View>
     );
   }
 }

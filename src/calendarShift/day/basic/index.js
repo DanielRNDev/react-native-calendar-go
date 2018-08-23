@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   TouchableOpacity,
   Text,
-  View
+  View,
 } from 'react-native';
 import lodash from 'lodash';
 import PropTypes from 'prop-types';
@@ -71,10 +71,9 @@ class Day extends Component {
       }
       // console.log('marking changed', markingChanged);
       return markingChanged;
-    } else {
-      // console.log('changed', changed);
-      return !!changed;
     }
+    // console.log('changed', changed);
+    return !!changed;
   }
 
   render() {
@@ -85,17 +84,17 @@ class Day extends Component {
     let marking = this.props.marking || {};
     if (marking && marking.constructor === Array && marking.length) {
       marking = {
-        marking: true
+        marking: true,
       };
     }
-    let isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
+    const isDisabled = typeof marking.disabled !== 'undefined' ? marking.disabled : this.props.state === 'disabled';
     let dot;
     if (marking.marked) {
       dotStyle.push(this.style.visibleDot);
       if (marking.dotColor) {
-        dotStyle.push({backgroundColor: marking.dotColor});
+        dotStyle.push({ backgroundColor: marking.dotColor });
       }
-      dot = (<View style={dotStyle}/>);
+      dot = (<View style={dotStyle} />);
     }
     let topExtra;
     if (marking.topExtra || marking.reEmployee) {
@@ -116,10 +115,14 @@ class Day extends Component {
     if (marking.selected) {
       containerStyle.push(this.style.selected);
       if (marking.selectedColor) {
-        containerStyle.push({backgroundColor: marking.selectedColor});
+        containerStyle.push({ backgroundColor: marking.selectedColor });
       }
       dotStyle.push(this.style.selectedDot);
-      textStyle.push(this.style.selectedText);
+      if (marking.selectedTextColor) {
+        textStyle.push({ color: marking.selectedTextColor });
+      } else {
+        textStyle.push(this.style.selectedText);
+      }
     } else if (isDisabled) {
       textStyle.push(this.style.disabledText);
     } else if (this.props.state === 'today') {
@@ -127,29 +130,40 @@ class Day extends Component {
     }
 
     if (marking.hasOwnProperty('borderColorShift')) {
-      containerStyle.push({ borderColor: marking.borderColorShift, borderWidth: 3 })
-      textStyle.push({ marginTop: 2 })
+      containerStyle.push({ borderColor: marking.borderColorShift, borderWidth: 3 });
+      textStyle.push({ marginTop: 2 });
     }
 
     if (!lodash.isEmpty(this.props.chooseDate)) {
-      if(this.props.chooseDate.day === this.props.children && this.props.date.month === this.props.chooseDate.month) {
-        containerStyle.push({ borderColor: 'black', borderWidth: 3 })
-        textStyle.push({ marginTop: 2 })
+      if (this.props.chooseDate.day === this.props.children && this.props.date.month === this.props.chooseDate.month) {
+        containerStyle.push({ borderColor: 'black', borderWidth: 3 });
+        textStyle.push({ marginTop: 2 });
       }
     }
 
     return (
-      <TouchableOpacity
-        style={[containerStyle, { borderRadius: 16 }]}
-        onPress={this.onDayPress}
-        onLongPress={this.onDayLongPress}
-        activeOpacity={marking.activeOpacity}
-        disabled={!marking.selected}
+      <View
+        style={{
+          width: 35,
+          height: 50,
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
       >
-        <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
-        {dot}
+        <TouchableOpacity
+          style={[containerStyle, { borderRadius: 16 }]}
+          onPress={this.onDayPress}
+          onLongPress={this.onDayLongPress}
+          activeOpacity={marking.activeOpacity}
+
+          disabled={!marking.selected}
+        >
+          <Text allowFontScaling={false} style={textStyle}>{String(this.props.children)}</Text>
+          {dot}
+        </TouchableOpacity>
         {topExtra}
-      </TouchableOpacity>
+      </View>
+
     );
   }
 }
