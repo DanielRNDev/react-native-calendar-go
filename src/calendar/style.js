@@ -13,8 +13,6 @@ export default function getStyle(theme={}) {
       backgroundColor: appStyle.calendarBackground
     },
     week: {
-      marginTop: 2,
-      marginBottom: 2,
       flexDirection: 'row',
       justifyContent: 'space-around'
     },
