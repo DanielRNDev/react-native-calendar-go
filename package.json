@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendar-go",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "Custom calendar module for react-native",
   "main": "src/index.js",
   "scripts": {
