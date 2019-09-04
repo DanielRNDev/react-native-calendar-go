@@ -15,7 +15,7 @@ export default function(theme={}) {
       fontSize: 16,
       lineHeight: 16,
       fontFamily: appStyle.textMonthFontFamily,
-      color: 'rgb(55,198,251)',
+      color: appStyle.monthTextColor,
     },
     arrow: {
       padding: 10
